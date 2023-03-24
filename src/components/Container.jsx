@@ -1,0 +1,19 @@
+import { useContext, useEffect } from "react";
+import { PhotoContext } from "../store/PhotoContext";
+import Gallery from "./Gallery";
+import Loader from "./Loader";
+
+const Container = ({ searchTerm }) => {
+  const { images, loading, RunSearch } = useContext(PhotoContext);
+  useEffect(() => {
+    RunSearch(searchTerm);
+  }, [searchTerm]);
+
+  return (
+    <div className="photo-container">
+      {loading ? <Loader /> : <Gallery data={images} />}
+    </div>
+  );
+};
+
+export default Container;
