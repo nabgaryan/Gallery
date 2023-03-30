@@ -6,15 +6,15 @@ const Navigation = () => {
       <ul>
         <li>
           <NavLink to="/Mountain">Mountain</NavLink>
-          <li>
-            <NavLink to="/beach">Beaches</NavLink>
-          </li>
-          <li>
-            <NavLink to="/bird">Birds</NavLink>
-          </li>
-          <li>
-            <NavLink to="/food">Food</NavLink>
-          </li>
+        </li>
+        <li>
+          <NavLink to="/beach">Beaches</NavLink>
+        </li>
+        <li>
+          <NavLink to="/bird">Birds</NavLink>
+        </li>
+        <li>
+          <NavLink to="/food">Food</NavLink>
         </li>
       </ul>
     </nav>

@@ -5,8 +5,8 @@ const Gallery = (props) => {
   let results = props.data;
   let images;
   let noImages;
-  if (results.length > 0) {
-    images = results.map(image => {
+  if (results && results.length > 0) {
+    images = results.map((image) => {
       let farm = image.farm;
       let server = image.server;
       let id = image.id;

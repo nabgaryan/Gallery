@@ -1,56 +1,51 @@
 import "./App.css";
-import PhotoContextProvider from "./store/PhotoContext";
-import {
-  HashRouter,
-  Route,
-  Switch,
-  Redirect,
-  createBrowserRouter,
-  RouterProvider,
-  useParams
-} from "react-router-dom";
-import Header from "./components/Header";
-import Item from "./components/Item";
-import Search from "./components/Search";
-import NotFound from "./components/NotFound";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Item, { loader as loadImages } from "./components/Item";
+import Search, { loader as loadSearchImages } from "./components/Search";
 import Root from "./components/Root";
+import Error from "./components/Error";
 
 function App() {
-
-  const handleSubmit = (e, history, searchInput) => {
-    history = [];
-    e.preventDefault();
-    e.currentTarget.reset();
-    let url = `/search/${searchInput}`;
-    history.push(url);
-  };
-
-  const params = useParams();
-
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Root handleSubmit={handleSubmit} />,
+      element: <Root />,
+      errorElement: <Error />,
       children: [
-        { path: "/mountain", element: <Item searchTerm="mountain" /> },
-        { path: "/beach", element: <Item searchTerm="beach" /> },
-        { path: "/bird", element: <Item searchTerm="bird" /> },
-        { path: "/food", element: <Item searchTerm="food" /> },
+        {
+          path: "/mountain",
+          element: <Item searchTerm="mountain" />,
+          loader: loadImages,
+        },
+        {
+          path: "/beach",
+          element: <Item searchTerm="beach" />,
+          loader: loadImages,
+        },
+        {
+          path: "/bird",
+          element: <Item searchTerm="bird" />,
+          loader: loadImages,
+        },
+        {
+          path: "/food",
+          element: <Item searchTerm="food" />,
+          loader: loadImages,
+        },
+
         {
           path: "/search/:searchInput",
-          element: <Search searchTerm={params.searchInput} />,
+          element: <Search />,
+          loader: loadSearchImages,
         },
-        { path: "/food", element: <Item searchTerm="food" /> },
       ],
     },
   ]);
 
   return (
-    <PhotoContextProvider>
-      <div className="container">
-        <RouterProvider router={router} />
-      </div>
-    </PhotoContextProvider>
+    <div className="container">
+      <RouterProvider router={router} />;
+    </div>
   );
 }
 

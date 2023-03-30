@@ -1,17 +1,15 @@
-import { useContext, useEffect } from "react";
-import { PhotoContext } from "../store/PhotoContext";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import Gallery from "./Gallery";
 import Loader from "./Loader";
 
-const Container = ({ searchTerm }) => {
-  const { images, loading, RunSearch } = useContext(PhotoContext);
-  useEffect(() => {
-    RunSearch(searchTerm);
-  }, [searchTerm]);
+const Container = () => {
+  const navigation = useNavigation();
+  const data = useLoaderData();
+  const images = data.photos.photo;
 
   return (
     <div className="photo-container">
-      {loading ? <Loader /> : <Gallery data={images} />}
+      {navigation.state === "loading" ? <Loader /> : <Gallery data={images} />}
     </div>
   );
 };

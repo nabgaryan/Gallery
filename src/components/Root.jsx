@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
-const Root = (props) => {
+const Root = () => {
   return (
     <>
-      <Header handleSubmit={props.handleSubmit}/>
+      <Header />
       <Outlet />
     </>
   );
